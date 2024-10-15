@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetSuite Development Tool</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css"
+    />
+  </head>
+  <body>
+    <nav class="blue darken-3">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">Nera NetSuite Dev Tool</a>
+        <ul id="nav-mobile" class="right">
+          <li>
+            <a href="#" id="darkModeToggle"
+              ><i class="material-icons">brightness_4</i></a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <div class="side-nav">
+        <div class="collection">
+          <a href="#converterTab" class="collection-item">Converter</a>
+          <a href="#apiMapTab" class="collection-item">API Map</a>
+          <a href="#objectsTab" class="collection-item">Objects (nlobj)</a>
+          <a href="#snippetsTab" class="collection-item">Code Snippets</a>
+          <a href="#recordBrowserTab" class="collection-item">Record Browser</a>
+          <a href="#scriptGeneratorTab" class="collection-item"
+            >Script Generator</a
+          >
+          <a href="#debuggerTab" class="collection-item">Debugger</a>
+          <a href="#deploymentTab" class="collection-item">Deployment</a>
+          <a href="#fileExplorerTab" class="collection-item">File Explorer</a>
+          <a href="#searchTab" class="collection-item">Search</a>
+        </div>
+      </div>
+
+      <div class="content">
+        <div id="converterTab" class="tab-content">
+          <h4>API Converter</h4>
+          <div class="row">
+            <div class="col s12 m6">
+              <h5>Input (Old NetSuite API)</h5>
+              <textarea
+                id="input"
+                class="materialize-textarea"
+                rows="10"
+              ></textarea>
+            </div>
+            <div class="col s12 m6">
+              <h5>Output (New NetSuite API)</h5>
+              <pre id="output"></pre>
+              <button id="copyBtn" class="btn waves-effect waves-light">
+                Copy to Clipboard
+                <i class="material-icons right">content_copy</i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <button id="convertBtn" class="btn waves-effect waves-light">
+                Convert
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="apiMapTab" class="tab-content">
+          <h4>SuiteScript 1.0 to 2.x API Map</h4>
+          <div class="input-field">
+            <input
+              id="apiMapSearch"
+              type="text"
+              placeholder="Search API Map..."
+            />
+            <label for="apiMapSearch">Search</label>
+          </div>
+          <div id="apiMapResults"></div>
+        </div>
+
+        <div id="objectsTab" class="tab-content">
+          <h4>SuiteScript 1.0 to 2.x API Map – Objects (nlobj)</h4>
+          <div class="input-field">
+            <input
+              id="objectsSearch"
+              type="text"
+              placeholder="Search Objects..."
+            />
+            <label for="objectsSearch">Search</label>
+          </div>
+          <div id="objectsResults"></div>
+        </div>
+
+        <div id="snippetsTab" class="tab-content">
+          <h4>Code Snippets</h4>
+          <div class="row">
+            <div class="col s12 m4">
+              <div id="snippetsList"></div>
+            </div>
+            <div class="col s12 m8">
+              <textarea id="snippetsEditor"></textarea>
+              <button id="copySnippetBtn" class="btn waves-effect waves-light">
+                Copy Snippet
+                <i class="material-icons right">content_copy</i>
+              </button>
+              <button id="saveSnippetBtn" class="btn waves-effect waves-light">
+                Save Snippet
+                <i class="material-icons right">save</i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="recordBrowserTab" class="tab-content">
+          <h4>Record Browser</h4>
+          <div class="input-field">
+            <select id="recordTypeSelect">
+              <option value="" disabled selected>Choose a record type</option>
+            </select>
+            <label>Record Type</label>
+          </div>
+          <div id="fieldsList"></div>
+        </div>
+
+        <div id="scriptGeneratorTab" class="tab-content">
+          <h4>Script Generator</h4>
+          <div class="row">
+            <div class="col s12 m4">
+              <div id="scriptTypeList"></div>
+            </div>
+            <div class="col s12 m8">
+              <textarea id="scriptGeneratorOutput"></textarea>
+              <button id="copyScriptBtn" class="btn waves-effect waves-light">
+                Copy Script
+                <i class="material-icons right">content_copy</i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="debuggerTab" class="tab-content">
+          <h4>SuiteScript Debugger</h4>
+          <div id="debugControls">
+            <button id="runDebugBtn" class="btn waves-effect waves-light">
+              Run
+              <i class="material-icons right">play_arrow</i>
+            </button>
+            <button id="stepOverBtn" class="btn waves-effect waves-light">
+              Step Over
+              <i class="material-icons right">redo</i>
+            </button>
+            <button id="stepIntoBtn" class="btn waves-effect waves-light">
+              Step Into
+              <i class="material-icons right">subdirectory_arrow_right</i>
+            </button>
+            <button id="stepOutBtn" class="btn waves-effect waves-light">
+              Step Out
+              <i class="material-icons right">subdirectory_arrow_left</i>
+            </button>
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+              <h6>Script</h6>
+              <textarea id="debugScript"></textarea>
+            </div>
+            <div class="col s12 m6">
+              <h6>Console Output</h6>
+              <pre id="debugOutput"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="deploymentTab" class="tab-content">
+          <h4>Script Deployment</h4>
+          <div class="input-field">
+            <select id="deploymentScriptSelect">
+              <option value="" disabled selected>
+                Choose a script to deploy
+              </option>
+            </select>
+            <label>Script to Deploy</label>
+          </div>
+          <div class="input-field">
+            <input
+              id="deploymentAccountId"
+              type="text"
+              placeholder="NetSuite Account ID"
+            />
+            <label for="deploymentAccountId">NetSuite Account ID</label>
+          </div>
+          <button id="deployBtn" class="btn waves-effect waves-light">
+            Deploy Script
+            <i class="material-icons right">cloud_upload</i>
+          </button>
+          <div id="deploymentOutput"></div>
+        </div>
+
+        <div id="fileExplorerTab" class="tab-content">
+          <h4>File Explorer</h4>
+          <div class="file-explorer">
+            <ul id="fileTree">
+              <!-- File tree will be populated dynamically -->
+            </ul>
+          </div>
+          <div id="fileContent">
+            <textarea id="fileEditor"></textarea>
+            <button id="saveFileBtn" class="btn waves-effect waves-light">
+              Save File
+              <i class="material-icons right">save</i>
+            </button>
+          </div>
+        </div>
+
+        <div id="searchTab" class="tab-content">
+          <h4>NetSuite Documentation Search</h4>
+          <div class="input-field">
+            <input
+              id="docSearch"
+              type="text"
+              placeholder="Search NetSuite documentation..."
+            />
+            <label for="docSearch">Search</label>
+          </div>
+          <button id="searchBtn" class="btn waves-effect waves-light">
+            Search
+            <i class="material-icons right">search</i>
+          </button>
+          <div id="searchResults"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer blue darken-3">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <h5 class="white-text">NetSuite Development Tool</h5>
+            <p class="grey-text text-lighten-4">
+              Convert, map, and explore NetSuite APIs, objects, and records.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">© 2024 NetSuite Development Tool</div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
