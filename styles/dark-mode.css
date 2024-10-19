@@ -1,0 +1,49 @@
+.dark-mode {
+    --background-dark: #121212;
+    --text-dark: #FFFFFF;
+    --border-dark: #333333;
+    --hover-dark: #2B2B2B;
+    --card-dark: #1E1E1E;
+}
+
+.dark-mode body {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .side-nav {
+    background-color: var(--card-dark);
+    border-right: 1px solid var(--border-dark);
+}
+
+.dark-mode .side-nav .collection-item {
+    border-bottom: 1px solid var(--border-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .side-nav .collection-item:hover {
+    background-color: var(--hover-dark);
+}
+
+.dark-mode .side-nav .collection-item.active {
+    background-color: var(--primary-dark);
+}
+
+.dark-mode .output-container {
+    background-color: var(--card-dark);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .btn {
+    background-color: var(--primary-dark);
+}
+
+.dark-mode .btn:hover {
+    background-color: var(--primary-light);
+}
+
+.dark-mode .CodeMirror {
+    border-color: var(--border-dark);
+}
+
+/* Add more dark mode styles for specific components as needed */

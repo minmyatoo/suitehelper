@@ -1,0 +1,83 @@
+:root {
+    --primary-color: #2196F3;
+    --primary-light: #64B5F6;
+    --primary-dark: #1976D2;
+    --secondary-color: #FFC107;
+    --background-light: #FAFAFA;
+    --text-light: #333333;
+    --border-light: #E0E0E0;
+    --hover-light: #F0F0F0;
+    --card-light: #FFFFFF;
+    --transition-speed: 0.3s;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.side-nav {
+    height: 100%;
+    border-right: 1px solid var(--border-light);
+    padding-top: 20px;
+}
+
+.side-nav .collection-item {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.side-nav .collection-item:hover {
+    background-color: var(--hover-light);
+}
+
+.side-nav .collection-item.active {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.output-container {
+    background-color: var(--card-light);
+    padding: 1rem;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.output-text {
+    white-space: pre-wrap;
+    font-family: "Fira Code", monospace;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.CodeMirror {
+    height: auto;
+    border: 1px solid var(--border-light);
+}
+
+/* Add more styles as needed for specific components */
